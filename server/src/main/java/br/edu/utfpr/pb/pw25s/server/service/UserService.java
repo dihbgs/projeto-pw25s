@@ -1,5 +1,6 @@
 package br.edu.utfpr.pb.pw25s.server.service;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +12,8 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
+    public UserService(UserRepository userRepository) {
+        this.passwordEncoder = new BCryptPasswordEncoder();
         this.userRepository = userRepository;
     }
 

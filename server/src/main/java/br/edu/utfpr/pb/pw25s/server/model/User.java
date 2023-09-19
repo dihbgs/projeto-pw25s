@@ -2,16 +2,17 @@ package br.edu.utfpr.pb.pw25s.server.model;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.Size;
+import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
-@ToString
-@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "username"))
+@Entity
+@Table(name = "tb_users")
 public class User extends GenericModel {
+
     @NotNull
     @Size(min = 4, max = 64)
     private String username;
