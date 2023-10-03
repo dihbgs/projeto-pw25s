@@ -13,10 +13,14 @@ import lombok.Setter;
 @Entity
 @Table(name = "tb_users")
 public class User extends GenericModel {
+    @Getter
+    @Setter
     @NotNull
     @Size(min = 4, max = 64)
     private String username;
 
+    @Getter
+    @Setter
     @UniqueUsername
     @Size(min = 4, max = 64)
     @NotNull(message = "{br.edu.utfpr.pb.pw25s.server.model.User.NotNull.message}")
