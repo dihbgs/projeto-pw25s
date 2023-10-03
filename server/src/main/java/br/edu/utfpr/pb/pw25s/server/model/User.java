@@ -11,7 +11,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "tb_users")
+@Table(name = "table_users")
 public class User extends GenericModel {
     @Getter
     @Setter
