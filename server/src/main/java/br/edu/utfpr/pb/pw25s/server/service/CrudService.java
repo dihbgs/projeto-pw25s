@@ -1,6 +1,6 @@
 package br.edu.utfpr.pb.pw25s.server.service;
 
-import br.edu.utfpr.pb.pw25s.server.service.CrudService;
+import br.edu.utfpr.pb.pw25s.server.service.interfaces.ICrudService;
 
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,8 +11,7 @@ import org.springframework.data.domain.Page;
 import java.io.Serializable;
 import java.util.List;
 
-
-public abstract class CrudService <T, ID extends Serializable> implements ICrudService<T, ID> {
+public abstract class CrudService<T, ID extends Serializable> implements ICrudService<T, ID> {
     protected abstract JpaRepository<T, ID> getRepository();
 
     @Override
