@@ -7,15 +7,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-public interface ICrudService<T, ID extends Serializable> {
+public interface DefaultCrudService<T, ID extends Serializable> {
     List<T> findAll();
 
     List<T> findAll(Sort sort);
-    
+
     Page<T> findAll(Pageable pageable);
 
     T save(T entity);
-    
+
     T saveAndFlush(T entity);
 
     Iterable<T> save(Iterable<T> iterable);
