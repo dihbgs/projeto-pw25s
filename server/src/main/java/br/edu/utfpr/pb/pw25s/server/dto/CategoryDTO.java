@@ -9,6 +9,6 @@ public class CategoryDTO {
     private Long id;
 
     @Size(min = 2, max = 32)
-    @NotNull(message = "{br.edu.utfpr.pb.pw25s.server.dto.CategoryDTO.name.NotNull.message}")
+    @NotNull(message = "{br.edu.utfpr.pb.pw25s.server.model.name.NotNull.message}")
     private String name;
 }

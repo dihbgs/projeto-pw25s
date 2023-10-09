@@ -86,7 +86,7 @@ public class UserControllerTest {
     @Test
     public void postUser_whenUserHasNullUsername_receiveBadRequest() {
         User user = createValidUser();
-        user.setUsername(null);
+        user.setName(null);
         ResponseEntity<Object> response = postSignUp(user, Object.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
@@ -102,7 +102,7 @@ public class UserControllerTest {
     @Test
     public void postUser_whenUserUsernameWithLessThanRequired_receiveBadRequest() {
         User user = createValidUser();
-        user.setUsername("abc");
+        user.setName("abc");
         ResponseEntity<Object> response = postSignUp(user, Object.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
@@ -112,7 +112,7 @@ public class UserControllerTest {
         User user = createValidUser();
         String usernameWith256Chars = IntStream.rangeClosed(1, 256).mapToObj(x -> "a")
                 .collect(Collectors.joining());
-        user.setUsername(usernameWith256Chars);
+        user.setName(usernameWith256Chars);
         ResponseEntity<Object> response = postSignUp(user, Object.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
@@ -135,7 +135,7 @@ public class UserControllerTest {
     private User createValidUser() {
         User user = new User();
 
-        user.setUsername("test-user");
+        user.setName("test-user");
         user.setDisplayName("test-display");
         user.setPassword("P4ssword");
 

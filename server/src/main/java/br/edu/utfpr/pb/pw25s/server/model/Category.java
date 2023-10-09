@@ -19,9 +19,9 @@ import lombok.Data;
 @Table(name = "categories")
 @EqualsAndHashCode(callSuper = false)
 public class Category extends GenericModel {
-    @NotNull(message = "test")
     @Size(min = 2, max = 32)
     @EqualsAndHashCode.Exclude
+    @NotNull(message = "{br.edu.utfpr.pb.pw25s.server.model.name.NotNull.message}")
     @Column(length = 32, nullable = false)
     private String name;
 }

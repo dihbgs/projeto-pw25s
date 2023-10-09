@@ -1,6 +1,6 @@
-package br.edu.utfpr.dto;
+package br.edu.utfpr.pb.pw25s.server.dto;
 
-import br.edu.utfpr.pb.pw25s.server.annotation.UniqueUsername;
+import br.edu.utfpr.pb.pw25s.server.annotation.UniqueName;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -16,7 +16,7 @@ import lombok.Data;
 public class UserDTO {
     private Long id;
 
-    @UniqueUsername
+    @UniqueName
     @NotNull(message = "{br.edu.utfpr.pb.pw25s.model.User.name.NotNull.message}")
     @Size(min = 4, max = 64, message = "{br.edu.utfpr.pb.pw25s.model.User.Size.message}")
     private String name;

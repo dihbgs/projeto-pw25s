@@ -41,15 +41,14 @@ public class UserController {
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler({MethodArgumentNotValidException.class})
+    @ExceptionHandler({ MethodArgumentNotValidException.class })
     public APIError handlerValidationException(
-        MethodArgumentNotValidException exception,
-        HttpServletRequest request
-    ) {
+            MethodArgumentNotValidException exception,
+            HttpServletRequest request) {
         BindingResult result = exception.getBindingResult();
         Map<String, String> validationErrors = new HashMap<>();
 
-        for(FieldError error : result.getFieldErrors()) {
+        for (FieldError error : result.getFieldErrors()) {
             validationErrors.put(error.getField(), error.getDefaultMessage());
         }
 
