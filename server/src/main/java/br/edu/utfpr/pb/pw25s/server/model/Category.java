@@ -17,8 +17,8 @@ import lombok.Builder;
 @EqualsAndHashCode(callSuper = false)
 public class Category extends GenericModel {
     @NotNull
-    @Size(min = 2, max = 50)
+    @Size(min = 2, max = 32)
     @EqualsAndHashCode.Exclude
-    @Column(length = 50, nullable = false)
+    @Column(length = 32, nullable = false)
     private String name;
 }
