@@ -1,18 +1,19 @@
 package br.edu.utfpr.pb.pw25s.server.controller;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.utfpr.dto.CategoryDTO;
-import br.edu.utfpr.pb.pw25s.server.model.Category;
+import br.edu.utfpr.pb.pw25s.server.service.interfaces.DefaultCrudService;
 import br.edu.utfpr.pb.pw25s.server.service.CategoryService;
-import br.edu.utfpr.pb.pw25s.server.service.CrudService;
+import br.edu.utfpr.pb.pw25s.server.dto.CategoryDTO;
+import br.edu.utfpr.pb.pw25s.server.model.Category;
+
+import org.modelmapper.ModelMapper;
 
 @RestController
 @RequestMapping("category")
 public class CategoryController extends CrudController<Category, CategoryDTO, Long> {
-    private final CategoryService categoryService;
+    private final DefaultCrudService<Category, Long> categoryService;
     private final ModelMapper modelMapper;
 
     public CategoryController(CategoryService categoryService, ModelMapper modelMapper) {
@@ -22,7 +23,7 @@ public class CategoryController extends CrudController<Category, CategoryDTO, Lo
     }
 
     @Override
-    protected CrudService<Category, Long> getService() {
+    protected DefaultCrudService<Category, Long> getService() {
         return this.categoryService;
     }
 

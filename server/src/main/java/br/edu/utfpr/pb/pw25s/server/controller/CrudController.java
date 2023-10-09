@@ -18,11 +18,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import br.edu.utfpr.pb.pw25s.server.service.CrudService;
+import br.edu.utfpr.pb.pw25s.server.service.interfaces.DefaultCrudService;
 import jakarta.validation.Valid;
 
-public abstract class CrudController <T, D, ID extends Serializable> {
-    protected abstract CrudService<T, ID> getService();
+public abstract class CrudController<T, D, ID extends Serializable> {
+    protected abstract DefaultCrudService<T, ID> getService();
+
     protected abstract ModelMapper getModelMapper();
 
     private final Class<T> typeClass;
@@ -41,36 +42,32 @@ public abstract class CrudController <T, D, ID extends Serializable> {
         return getModelMapper().map(entityDto, this.typeClass);
     }
 
-    @GetMapping //http://ip.api:port/classname
+    @GetMapping // http://ip.api:port/classname
     public ResponseEntity<List<D>> findAll() {
         return ResponseEntity.ok(
                 getService().findAll().stream().map(
-                        this::convertToDto).collect(Collectors.toList()
-                )
-        );
+                        this::convertToDto).collect(Collectors.toList()));
     }
 
-    @GetMapping("page")  //http://ip.api:port/classname/page
+    @GetMapping("page") // http://ip.api:port/classname/page
     public ResponseEntity<Page<D>> findAll(
-                        @RequestParam int page,
-                        @RequestParam int size,
-                        @RequestParam(required = false) String order,
-                        @RequestParam(required = false) Boolean asc
-                    ) {
+            @RequestParam int page,
+            @RequestParam int size,
+            @RequestParam(required = false) String order,
+            @RequestParam(required = false) Boolean asc) {
         PageRequest pageRequest = PageRequest.of(page, size);
         if (order != null && asc != null) {
             pageRequest = PageRequest.of(page, size,
                     asc ? Sort.Direction.ASC : Sort.Direction.DESC, order);
         }
         return ResponseEntity.ok(
-                getService().findAll(pageRequest).map(this::convertToDto)
-        );
+                getService().findAll(pageRequest).map(this::convertToDto));
     }
 
     @GetMapping("{id}")
     public ResponseEntity<D> findOne(@PathVariable ID id) {
         T entity = getService().findOne(id);
-        if ( entity != null) {
+        if (entity != null) {
             return ResponseEntity.ok(convertToDto(entity));
         } else {
             return ResponseEntity.noContent().build();
@@ -105,5 +102,5 @@ public abstract class CrudController <T, D, ID extends Serializable> {
     public ResponseEntity<Void> delete(@PathVariable ID id) {
         getService().delete(id);
         return ResponseEntity.noContent().build();
-    }    
+    }
 }
