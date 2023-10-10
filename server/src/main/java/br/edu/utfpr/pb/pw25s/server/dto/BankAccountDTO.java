@@ -2,23 +2,23 @@ package br.edu.utfpr.pb.pw25s.server.dto;
 
 import br.edu.utfpr.pb.pw25s.server.model.User;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
 public class BankAccountDTO {
     private Long id;
 
+    @NotNull
+    private String name;
+
+    @NotNull
     private User user;
 
-    @Size(min = 2, max = 32)
-    private String number;
+    private int number;
 
-    @Size(min = 2, max = 32)
-    private String agency;
+    private int agency;
 
-    @Size(min = 2, max = 32)
-    private String bank;
+    private int bank;
 
     @NotNull(message = "{br.edu.utfpr.pb.pw25s.server.model.BankAccount.Type.NotNull.message}")
     private int type;

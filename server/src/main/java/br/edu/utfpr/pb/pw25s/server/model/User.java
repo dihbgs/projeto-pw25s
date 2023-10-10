@@ -1,19 +1,24 @@
 package br.edu.utfpr.pb.pw25s.server.model;
 
+import br.edu.utfpr.pb.pw25s.server.annotation.UniqueName;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import br.edu.utfpr.pb.pw25s.server.annotation.UniqueName;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import jakarta.persistence.Id;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
 @Table(name = "users")
-@EqualsAndHashCode(callSuper = false)
-public class User extends GenericModel {
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
     @NotNull
     @Size(min = 4, max = 64, message = "{br.edu.utfpr.pb.pw25s.server.model.name.Size.message}")
     private String name;
